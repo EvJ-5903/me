@@ -2,6 +2,10 @@
 """Modify each function until the tests pass."""
 
 
+from os import stat
+from tkinter.ttk import setup_master
+
+
 def is_odd(a_number):
     """Return True if a_number is odd, and False if a_number is even.
 
@@ -13,7 +17,11 @@ def is_odd(a_number):
 
     So if a_number modulo two is zero, then it's even.
     """
-    return None
+    if(a_number % 2) == 0:
+        Condition = False
+    else:
+        Condition = True
+    return Condition
 
 
 def fix_it(moves=True, should_move=True):
@@ -31,7 +39,13 @@ def fix_it(moves=True, should_move=True):
     Most people write this function with 4 return statements.
     As an extra challenge, see if you can get that down to three.
     """
-    return None
+    if (moves==True and should_move==True) or (moves==False and should_move==False):
+        statement = "No Problem"
+    elif (moves==True and should_move==False):
+        statement = "Duct Tape"
+    else:
+        statement = "WD-40"
+    return statement
 
 
 def loops_preview():
@@ -54,7 +68,10 @@ def loops_1a():
     return a list of 10 items, each one a string with exacly one star in it.
     E.g.: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
     """
-    return None
+    star_list =[]
+    for i in range(10):
+        star_list.append("*")
+    return star_list
 
 
 def loops_1c(number_of_items=5, symbol="#"):
@@ -67,7 +84,10 @@ def loops_1c(number_of_items=5, symbol="#"):
     Remember that you're being passed arguments here. Don't hard code the number
     or the symbol, let it be whatever it wants to be.
     """
-    return None
+    hash_list = []
+    for i in range(number_of_items):
+        hash_list.append(symbol)
+    return hash_list
 
 
 def loops_2():
@@ -88,7 +108,14 @@ def loops_2():
             ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
           ]
     """
-    return None
+    mstar_list = []
+    tinyset = []
+    for i in range(10):
+        tinyset.append("*")
+    for i in range(10):
+        mstar_list.append(tinyset)
+
+    return mstar_list
 
 
 def loops_3():
@@ -112,7 +139,16 @@ def loops_3():
     TIP: notice that this needs to to return strings of numbers,
          so call str(number) to cast.
     """
-    return None
+    masterlist = []
+    numlist = []
+    number = 0
+    for i in range(10):
+        numlist.append(str(number))
+        for j in range(10):
+            masterlist.append(numlist)
+            number = number + 1
+            numlist = []
+    return masterlist
 
 
 def loops_4():
@@ -132,7 +168,13 @@ def loops_4():
       ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     ]
     """
-    return None
+    master_list = []
+    numset = []
+    for i in range(10):
+        numset.append(str(i))
+    for j in range(10):
+        master_list.append(numset)
+    return master_list
 
 
 def loops_5():
