@@ -2,12 +2,8 @@
 """Modify each function until the tests pass."""
 
 
-from doctest import master
 from os import stat
-from re import L
 from tkinter.ttk import setup_master
-
-from pyparsing import col
 
 
 def is_odd(a_number):
@@ -145,11 +141,13 @@ def loops_3():
     """
     masterlist = []
     numlist = []
+    number = 0
     for i in range(10):
+        numlist.append(str(number))
         for j in range(10):
-            numlist.append(str(i))        
-        masterlist.append((numlist))
-        numlist = []
+            masterlist.append(numlist)
+            number = number + 1
+            numlist = []
     return masterlist
 
 
