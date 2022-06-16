@@ -28,6 +28,11 @@ def advancedGuessingGame():
     Remember to think modular. Try to keep your functions small and single
     purpose if you can!
     """
+    print("\nWelcome to the guessing game!")
+    print("A number between 0 and _ ?")
+    upperBound = input("Enter an upper bound: ")
+    print(f"OK then, a number between 0 and {upperBound} ?")
+    upperBound = int(upperBound)
 
     return "You got it!"
     # the tests are looking for the exact string "You got it!". Don't modify that!

@@ -17,7 +17,12 @@ def loop_ranger(start, stop=None, step=1):
     Look up for how range() works in the python docs. You could  answer this
     with just the range function, but we'd like you to do it the long way.
     """
-    return None
+    result = range(start,stop, step)
+    newlist = []
+    for i in result:
+        newlist.append(i)
+
+    return newlist 
 
 
 def two_step_ranger(start, stop):
@@ -28,7 +33,12 @@ def two_step_ranger(start, stop):
 
     You can either reuse loop_ranger, or the range function that in the standard library
     """
-    return None
+    result = range(start,stop, 2)
+    newlist = []
+    for i in result:
+        newlist.append(i)    
+    
+    return newlist
 
 
 def stubborn_asker(low, high):
@@ -39,7 +49,13 @@ def stubborn_asker(low, high):
 
     Look up the docs for a function called "input"
     """
-    return None
+    firstin = int(input("I want a number between " + str(low) + " and " + str(high) + ":"))
+    while True:
+        if(low <= firstin <= high):
+            print("Ok")
+            return firstin
+        else: 
+            firstin = int(input("I want a number between " + str(low) + " and " + str(high) + ":"))
 
 
 def not_number_rejector(message):
@@ -49,7 +65,17 @@ def not_number_rejector(message):
     (e.g. "cow", "six", "8!") then throw it out and ask for an actual number.
     When you do get a number, return it.
     """
-    return None
+    while True:
+        flag = False
+        try:
+            firstinput = int(input("I want a number: "))
+        except:
+            print("No, I said I wanted a number")
+            flag = True
+        finally:
+            if (flag == False):
+                print("Perfection")
+                return firstinput
 
 
 def super_asker(low, high):
@@ -58,7 +84,19 @@ def super_asker(low, high):
     Combine what you learnt from stubborn_asker and not_number_rejector
     to make a function that does it all!
     """
-    return None
+    while True:
+        flag = False
+        try:
+            firstinput = int(input("I want a number between " + str(low) + " and " + str(high) + ":"))
+        except:
+            print("No, I said I wanted a number")
+            flag = True
+        finally:
+            if (flag == False):
+                if(low <= firstinput <= high):
+                    print("Ok")
+                    return firstinput
+
 
 
 if __name__ == "__main__":
