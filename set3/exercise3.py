@@ -4,6 +4,7 @@ Steps on the way to making your own guessing game.
 """
 
 import random
+from turtle import up
 
 
 def advancedGuessingGame():
@@ -29,11 +30,58 @@ def advancedGuessingGame():
     purpose if you can!
     """
     print("\nWelcome to the guessing game!")
-    print("A number between 0 and _ ?")
-    upperBound = input("Enter an upper bound: ")
-    print(f"OK then, a number between 0 and {upperBound} ?")
-    upperBound = int(upperBound)
-
+    check = False
+    check2 = False
+    while check == False:
+      flag = False
+      try:
+          lowerbound = int(input("Enter a lower bound: "))
+      except:
+          print("No, I said I wanted a number")
+          flag = True
+      finally:
+          if (flag == False):
+                while check2 == False:
+                  flag = False
+                  try:
+                    upperbound = int(input("Enter an upper bound: "))
+                  except:
+                    print("No, I said I wanted a number")
+                    flag = True
+                  finally:
+                    if (flag == False):
+                      if (upperbound < lowerbound):
+                        print ("Upper Bound cannot be lower than Lower Bound")
+                      elif(upperbound == lowerbound):
+                        print("Bounds cannot be the same")
+                      elif(upperbound - lowerbound == 1):
+                        print("You can't guess anything in these bounds")
+                      else:
+                        print(f"Great! The Bounds are between {lowerbound} & {upperbound}")
+                        check2 = True
+                        check = True
+                        break
+    actualNumber = random.randint(lowerbound, upperbound)
+    guessed = False
+    while not guessed:
+      flag1 = False
+      try:
+        guessedNumber = int(input("Guess a number: "))
+        print(f"You guessed {guessedNumber},")
+      except:
+        print("Not a Number!!")
+        flag1 = True
+      finally:
+        if(flag1 == False):
+          if guessedNumber == actualNumber:
+            print(f"You got it!! It was {actualNumber}")
+            guessed = True
+          elif (guessedNumber < actualNumber and guessedNumber < lowerbound and (guessedNumber != lowerbound or upperbound)) or (guessedNumber > actualNumber and guessedNumber > upperbound and (guessedNumber != lowerbound or upperbound)):
+            print("Did you know that is outside the bounds? Try again")
+          elif (guessedNumber < actualNumber):
+            print("Too small, try again :'(")
+          else:
+            print("Too big, try again :'(")
     return "You got it!"
     # the tests are looking for the exact string "You got it!". Don't modify that!
 
