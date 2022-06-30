@@ -1,6 +1,8 @@
 """All about IO."""
 
 
+from distutils.dep_util import newer
+from hashlib import new
 import json
 import os
 import re
@@ -113,13 +115,22 @@ def pokedex(low=1, high=5):
          get very long. If you are accessing a thing often, assign it to a
          variable and then future access will be easier.
     """
-    id = 5
-    url = f"https://pokeapi.co/api/v2/pokemon/{id}"
-    r = requests.get(url)
-    if r.status_code is 200:
-        the_json = json.loads(r.text)
+    id = 1
+    weightClasses = []
+    for i in range(low, high + 1):
+        url = f"https://pokeapi.co/api/v2/pokemon/{id}"
+        id += 1
+        r = requests.get(url)
+        if r.status_code is 200:
+            the_json = json.loads(r.text)
+        weight = the_json["weight"]
+        weightClasses.append(weight)
+        newDict = {}
+        newerDict = {id: weight}
+        newDict.update(newerDict)
+        weightClasses.sort()
 
-    return {"name": None, "weight": None, "height": None}
+    return {"name": newDict, "weight": weightClasses, "height": None}
 
 
 def diarist():
