@@ -101,7 +101,7 @@ def wordy_pyramid():
     return pyramid
 
 
-def pokedex(low=1, high=5):
+def pokedex(low=70, high=80):
     """Return the name, height and weight of the tallest pokemon in the range low to high.
 
     Low and high are the range of pokemon ids to search between.
@@ -115,22 +115,34 @@ def pokedex(low=1, high=5):
          get very long. If you are accessing a thing often, assign it to a
          variable and then future access will be easier.
     """
-    id = 1
-    weightClasses = []
+    id = low
+    actualid = 0
+    heightClasses = []
+    newDict = {}
     for i in range(low, high + 1):
         url = f"https://pokeapi.co/api/v2/pokemon/{id}"
-        id += 1
         r = requests.get(url)
         if r.status_code is 200:
             the_json = json.loads(r.text)
-        weight = the_json["weight"]
-        weightClasses.append(weight)
-        newDict = {}
-        newerDict = {id: weight}
-        newDict.update(newerDict)
-        weightClasses.sort()
+        height = the_json["height"]
+        newDict.setdefault(height, []).append(id)
+        heightClasses.sort()
+        sortednewDict = sorted(newDict.items(),reverse=True)
+        id += 1
+    namesid = sortednewDict[actualid][1]
+    if type(namesid) is list:
+        namesid = namesid[0]   
+    url = f"https://pokeapi.co/api/v2/pokemon/{namesid}"
+    r = requests.get(url)
+    if r.status_code is 200:
+        the_json = json.loads(r.text)
+    acName = the_json["name"]
+    acWeight = the_json["weight"]
+    acHeight = the_json["height"] 
 
-    return {"name": newDict, "weight": weightClasses, "height": None}
+
+
+    return {"name": acName, "weight": acWeight, "height": acHeight}
 
 
 def diarist():
@@ -150,6 +162,8 @@ def diarist():
 
     NOTE: this function doesn't return anything. It has the _side effect_ of modifying the file system
     """
+    with open(r"C:\Users\Evan\Desktop\UNSW\CODE1161\1161\me\set4\lasers.pew", "w", encoding="utf-8") as history_book:
+        history_book.write(f"11")
     pass
 
 
@@ -159,7 +173,7 @@ if __name__ == "__main__":
     wp = wordy_pyramid()
     [print(f"{word} {len(word)}") for word in wp]
 
-    print(pokedex(low=3, high=7))
+    print(pokedex(low=70, high=80))
 
     diarist()
 
