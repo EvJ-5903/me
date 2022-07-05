@@ -163,7 +163,7 @@ def diarist():
     NOTE: this function doesn't return anything. It has the _side effect_ of modifying the file system
     """
     with open(r"C:\Users\Evan\Desktop\UNSW\CODE1161\1161\me\set4\lasers.pew", "w", encoding="utf-8") as history_book:
-        history_book.write(f"11")
+        history_book.write(f"6")
     pass
 
 
