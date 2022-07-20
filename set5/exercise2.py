@@ -76,7 +76,7 @@ def italian_rules(word):
         return word
 
 
-def abba(source="abba", guard=3):
+def abba(source="baaab", guard=2):
     """Recursively replace letters acording to the rules.
 
     This function takes a seed string, e.g. "abba" and replaces each letter in
@@ -91,7 +91,7 @@ def abba(source="abba", guard=3):
     aobaobbbabbaoaaobbbaoaaobaobaobbba
                 and so on...
     """
-    def apply_rules(letter, guard):
+    def apply_rules(letter):
         """Control the substitution.
 
         You need to change these substitutions to make it work.
@@ -99,16 +99,25 @@ def abba(source="abba", guard=3):
         Hint: when guard == -1 return the letter.
         """
         if letter == "a":
-            return "a"
+            return "bba"
         elif letter == "b":
-            return "b"
+            return "aob"
         elif letter == "o":
-            return "o"
+            return "oa"
         else:
             return letter
 
+
     # write the rest of the function here
-    pass
+    newstring = ""
+    for i in source:
+        result = list(map(apply_rules, i))
+        newstring = newstring + newstring.join(result)
+    guard -= 1
+    if guard > 0:
+        return abba(newstring, guard)
+    else:
+        return newstring
 
 
 def koch(t, order, size):
@@ -144,7 +153,7 @@ def draw_koch(drawing_method, steps_deep=4):
 
 def square_koch(t, order, size):
     r"""Draw a koch curve with a square rather than a triangular point.
-
+    z
            _
     e.g. _| |_ rather than _/\_
 
@@ -153,6 +162,18 @@ def square_koch(t, order, size):
     """
     trace = ""
     # write the rest of the function here.
+    if order == 0:          # The base case is just a straight line
+        t.forward(size)
+    else:
+        trace += square_koch(t, order-1, size/3)   # Go 1/3 of the way
+        t.left(90)
+        trace += square_koch(t, order-1, size/3)
+        t.right(90)
+        trace += square_koch(t, order-1, size/3)
+        t.right(90)    
+        trace += square_koch(t, order-1, size/3)
+        t.left(90)
+        trace += square_koch(t, order-1, size/3)    
     return str(order) + trace
     pass
 
